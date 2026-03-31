@@ -1,0 +1,23 @@
+[
+    {
+        "device": "Fan",
+        "room": "LivingRoom",
+        "sensor": "temperature",
+        "threshold": 25,
+        "action": "ON"
+    },
+    {
+        "device": "Light",
+        "room": "Kitchen",
+        "sensor": "light",
+        "threshold": 150,
+        "action": "ON"
+    },
+    {
+        "device": "Fan",
+        "room": "LivingRoom",
+        "sensor": "temperature",
+        "threshold": 25.0,
+        "action": "ON"
+    }
+]
