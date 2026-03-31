@@ -1,6 +1,7 @@
 import argparse
 from smart_home.core import Sensor, Device
 from .automation import SmartHome, AutomationRule, save_rules, load_rules
+from .plot import plot_sensor, plot_devices
 import random
 import time
 
@@ -19,14 +20,18 @@ def main():
     read_parser.add_argument("sensor_type", choices=["temperature", "humidity", "light"])
     read_parser.add_argument("--room", required=True)
     read_parser.add_argument("--duration", type=int, default=5)
- #########
+ 
     rule_parser = subparsers.add_parser("set-rule", help="Add a new automation rule")
     rule_parser.add_argument("--device", required=True)
     rule_parser.add_argument("--room", required=True)
     rule_parser.add_argument("--sensor", required=True)
     rule_parser.add_argument("--threshold", type=float, required=True)
     rule_parser.add_argument("--action", choices=["ON", "OFF"], required=True)
-
+     
+    # Plot sensors
+    plot_parser = subparsers.add_parser("plot")
+    plot_parser.add_argument("--sensors", action="store_true")
+    plot_parser.add_argument("--devices", action="store_true")
  
 
     args = parser.parse_args()
@@ -119,3 +124,24 @@ def main():
         else:
             for i, rule in enumerate(home.rules, 1):
                 print(f"{i}. {rule.device.name} → {rule.action} when {rule.sensor.type} > {rule.threshold}")
+
+    elif args.command == "plot":
+        
+        import pandas as pd
+        data = pd.read_csv("dataset/sensor_data.csv")
+
+        if args.sensors:
+            # Create sensors
+            temp_sensor = Sensor("temperature", "LivingRoom")
+            humidity_sensor = Sensor("humidity", "LivingRoom")
+            light_sensor = Sensor("light", "Kitchen")
+
+            # Load data into history
+            temp_sensor.history = data["temp_living"].tolist()
+            humidity_sensor.history = data["humidity_living"].tolist()
+            light_sensor.history = data["light_kitchen"].tolist()
+
+            # Plot
+            plot_sensor(temp_sensor)
+            plot_sensor(humidity_sensor)
+            plot_sensor(light_sensor)
