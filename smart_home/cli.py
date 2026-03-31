@@ -1,5 +1,6 @@
 import argparse
 from smart_home.core import Sensor, Device
+from .automation import SmartHome
 import random
 import time
 
