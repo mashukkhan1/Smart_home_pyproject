@@ -47,7 +47,7 @@ def main():
     home.add_sensor(light_sensor)
     home.add_device(fan)
     home.add_device(light)
-   
+    load_rules(home)
 
     # automation rules
     home.add_rule(AutomationRule(fan, temp_sensor, threshold=25, action="ON"))
