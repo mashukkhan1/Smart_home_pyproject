@@ -123,5 +123,4 @@ uv venv
 
 This project demonstrates how IoT concepts like **sensors, devices, and
 automation rules** can be simulated in software using Python --- without
-any hardware. It combines **data handling, CLI design, and
-visualization** into a simple and practical system.
+any hardware.
