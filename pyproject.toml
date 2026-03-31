@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smart_home"
+version = "0.1.0"
+requires-python = ">=3.10"
+description = "Smart Home Simulator with device automation and plotting"
+authors = [
+    {name="Mashuk Khan"}
+]
+dependencies = ["numpy", "matplotlib", "pandas"]
